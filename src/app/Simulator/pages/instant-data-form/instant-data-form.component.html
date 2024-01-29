@@ -1,0 +1,214 @@
+<div *ngIf="showLoaderImage" class="col-lg-12" style="margin-left:0%; margin-top:0%;margin-bottom:0%;"
+        align="center">
+        <img src="/assets/img/dashboard/ProgressLoader.gif" height="auto" width="50%" alt="Loading........">
+      </div>
+<div class="row margin_0px">
+    <div class="col-md-12 padding_0px">
+        <div class="padding_Form">
+            <form [formGroup]="instantDataForm" novalidate (ngSubmit)="sendForm()">
+                <div class="m-form__group row">
+                    <div class="col-lg-6">
+                        <label i18n="Gateway Template|Gateway Template@@gatewayTemplate*">Gateway Template<span
+                                class="text-danger">*</span> </label>
+                        <div class="form-group">
+                            <div [ngClass]="{'has-error': ((instantDataForm.get('gateWayTemplateId').touched ||
+                            instantDataForm.get('gateWayTemplateId').dirty) &&
+                            instantDataForm.get('gateWayTemplateId').errors)}">
+                            <ejs-dropdownlist id='ddlelement' #ddlelement class="form-control p-0" [value]='gateWayTemplateId'
+                  name="gateWayTemplateId" formControlName="gateWayTemplateId" [dataSource]='gatewayTemplateList'
+                  [placeholder]='gatewayTemplateWaterMark' [fields]='gatewayTemplateFields' [popupHeight]='height'
+                  [sortOrder]="sortDropDown" (filtering)='onFilteringGatewayTemplates($event)'
+                  [filterBarPlaceholder]="filterPlaceholder" [allowFiltering]='true'
+                  (change)='gateWayTemplateChange($event.itemData.id)' [locale]='locale'></ejs-dropdownlist> 
+                                <span class="help-block" *ngIf="((instantDataForm.get('gateWayTemplateId').touched ||
+                                instantDataForm.get('gateWayTemplateId').dirty) &&
+                                instantDataForm.get('gateWayTemplateId').errors)">
+                                    <span i18n="Message|Please Select GateWay Template@@gatewayTemplate.message"
+                                        *ngIf="instantDataForm.get('gateWayTemplateId').errors.required">
+                                        Please select GateWay Template
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label i18n="Gateway|Gateway @@gateway*">Gateway<span class="text-danger">*</span></label>
+                        <div class="form-group">
+                            <div [ngClass]="{'has-error': ((instantDataForm.get('gateWayId').touched ||
+                            instantDataForm.get('gateWayId').dirty) &&
+                            instantDataForm.get('gateWayId').errors)}">
+                            <ejs-dropdownlist id='ddlelement' #ddlelement class="form-control p-0" [value]='gateWayId'
+                            name="gateWayId" formControlName="gateWayId" [dataSource]='gateWayList'
+                            [placeholder]='gatewayWaterMark' [fields]='gatewayFields' [popupHeight]='height'
+                            [sortOrder]="sortDropDown" (filtering)='onFilteringGateway($event)'
+                            [filterBarPlaceholder]="filterPlaceholder" [allowFiltering]='true'
+                            (change)='gateWayChange($event)' [locale]='locale'></ejs-dropdownlist>
+                                <span class="help-block" *ngIf="((instantDataForm.get('gateWayId').touched ||
+                            instantDataForm.get('gateWayId').dirty) &&
+                            instantDataForm.get('gateWayId').errors)">
+                                    <span i18n="Message|Please Select GateWay@@gateway.message"
+                                        *ngIf="instantDataForm.get('gateWayId').errors.required">
+                                        Please select GateWay
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-form__group row">
+                    <div class="col-lg-6">
+                        <label
+                            i18n="Communication Protocol|Communication Protocol@@communicationProtocol*">Communication
+                            Protocol<span class="text-danger">*</span> </label>
+                        <div class="form-group">
+                            <div [ngClass]="{'has-error': ((instantDataForm.get('communicationProtocolId').touched ||
+                            instantDataForm.get('communicationProtocolId').dirty) &&
+                            instantDataForm.get('communicationProtocolId').errors)}">
+                                <select formControlName="communicationProtocolId" (change)="commProtocolChange($event)"
+                                    class="form-control m-input" required>
+                                    <option i18n="Option|Select@@select" [ngValue]="null">--Select--</option>
+                                    <option *ngFor="let comm of communicationProtocolList" [value]="comm.id">
+                                        {{comm.commProtocol.name}}</option>
+                                </select>
+                                <span class="help-block" *ngIf="((instantDataForm.get('communicationProtocolId').touched ||
+                                instantDataForm.get('communicationProtocolId').dirty) &&
+                                instantDataForm.get('communicationProtocolId').errors)">
+                                    <span i18n="Message| Please Select Communication Protocol@@communicationProtocol.message"
+                                        *ngIf="instantDataForm.get('communicationProtocolId').errors.required">
+                                        Please Select Communication Protocol
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label i18n="Data Handler|Data Handler@@dataHandler*">Data Handler<span
+                                class="text-danger">*</span> </label>
+                        <div class="form-group">
+                            <div [ngClass]="{'has-error': ((instantDataForm.get('dataHandlerId').touched ||
+                            instantDataForm.get('dataHandlerId').dirty) &&
+                            instantDataForm.get('dataHandlerId').errors)}">
+                            <ejs-dropdownlist id='ddlelement' #ddlelement class="form-control p-0" [value]='dataHandlerId'
+                            name="dataHandlerId" formControlName="dataHandlerId" [dataSource]='dataHandlerList'
+                            [placeholder]='dataHandlerWaterMark' [fields]='dataHandlerFields' [popupHeight]='height'
+                            [sortOrder]="sortDropDown" (filtering)='onFilteringDataHandler($event)'
+                            [filterBarPlaceholder]="filterPlaceholder" [allowFiltering]='true'
+                            (change)='dHChange($event)' [locale]='locale'></ejs-dropdownlist>
+                               
+                                <span class="help-block" *ngIf="((instantDataForm.get('dataHandlerId').touched ||
+                                instantDataForm.get('dataHandlerId').dirty) &&
+                                instantDataForm.get('dataHandlerId').errors)">
+
+                                    <span i18n="Message|  Please select Data Handler@@dataHandler.message"
+                                        *ngIf="instantDataForm.get('dataHandlerId').errors.required">
+                                        Please select Data Handler
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="m-form__group row">
+
+                    <div  class="col-lg-6">
+                        <label i18n="Date/Time|Date/Time@@date/Time*">Date/Time<span
+                                class="text-danger">*</span></label>
+
+                        <div class="input-group">
+                            <input (click)="d2.toggle()" class="form-control" placeholder="MM/DD/YYYY"
+                                formControlName="startDate" placement="bottom-right" ngbDatepicker #d2="ngbDatepicker"
+                                [maxDate]="endDate" (dateSelect)="addMinDateValue()" [markDisabled]="isDisabled">
+                            <div>
+                                <input type="time" id="startTime" i18n-placeholder="" placeholder=""
+                                    formControlName="startTime" (click)="validateStartAndEndTime()"
+                                    (keyup)="validateStartAndEndTime()" class="form-control m-input" />
+
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+<br>
+
+
+                <div *ngIf="isSelected">
+
+                    <div formArrayName="dhTags">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-6"
+                                *ngFor="let dsInputParam of instantDataForm.get('dhTags')['controls']; let i=index;">
+                                <ng-container [formGroupName]="i">
+                                    <div [ngClass]="{'has-error': ((dsInputParam.get('value').touched ||
+                                             dsInputParam.get('value').dirty) &&
+                                              dsInputParam.get('value').errors)}">
+
+                                        <label
+                                            class=" m-input-icon m-input-icon--right">
+                                            {{dataHandlerTagsList[i].nodeIoTag.name}}<span
+                                            class="text-danger">*</span></label>
+                                        <div class="form-group">
+                                            <input type="hidden" formControlName="nodeIoDhId"
+                                                [ngModel]="dataHandlerTagsList[i].nodeIoDhId">
+                                            <input type="hidden" formControlName="nodeIoDhTagId"
+                                                [ngModel]="dataHandlerTagsList[i].id">
+                                                <input type="hidden" formControlName="nodeIoIOTagId"
+                                                [ngModel]="dataHandlerTagsList[i].nodeIoTag.id">
+                                            <input type="text" formControlName="value" class="form-control" id="data"
+                                                placeholder={{dataHandlerTagsList[i].nodeIoTag.name}} />
+
+                                        </div>
+
+                                        <span class="help-block" *ngIf=" ((dsInputParam.get('value').touched ||
+                                        dsInputParam.get('value').dirty) &&
+                                        dsInputParam.get('value').errors)">
+                                            <span  i18n="Message|Please enter only Alphabate value@@onlyNumericvalue.message"
+                                                *ngIf="instantDataForm.get('dhTags')['controls'][i].get('value').errors.pattern && dataHandlerTagsList[i].dataTypeName == 'String'">
+                                                Please enter only Alphabate value
+                                            </span>
+                                            <span  i18n="Message|Please enter only Numeric value@@onlyAlphabatevalue.message"
+                                                *ngIf="instantDataForm.get('dhTags')['controls'][i].get('value').errors.pattern && (dataHandlerTagsList[i].dataTypeName == 'Integer' || dataHandlerTagsList[i].dataTypeName == 'Long')">
+                                                Please enter only Numeric value
+                                            </span>
+                                            <span i18n="Message|Please enter only Decimal value@@onlyDecimalvalue.message"
+                                                *ngIf="instantDataForm.get('dhTags')['controls'][i].get('value').errors.pattern && (dataHandlerTagsList[i].dataTypeName == 'Double' || dataHandlerTagsList[i].dataTypeName == 'Float')">
+                                                Please enter only Decimal value
+                                            </span>
+                                        </span>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="path finalLine"></div>
+                <div class="row" style="    text-align: right;padding: 23px 0;">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-secondary text-center resetActionButton"
+                            [disabled]="!instantDataForm.dirty && instantDataForm.pristine || !instantDataForm.dirty && !instantDataForm.pristine"
+                            i18n="Reset button|Reset@@reset" (click)="resetForm()">
+                            Reset
+                        </button>
+                        &nbsp;
+                        <span i18n-matTooltip="Tooltip validation|Fill the mandatory fields@@fillTheMandatoryFields"
+                            matTooltip="Fill the mandatory fields" [matTooltipDisabled]='(instantDataForm.valid)'>
+                            <button i18n="Send button|Send@@send" class="btn btn-primary text-center"
+                                type="submit" [disabled]="!(instantDataForm.valid)">
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Global modal notification component selector for cancel and final save form-->
+<app-modal-notification></app-modal-notification>
